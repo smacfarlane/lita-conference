@@ -16,7 +16,14 @@ module Lita
       end
 
       def conference(response)
-        response.reply("That conference number isn't available")
+        name = response.args.first.downcase
+        info = config.conferences.each_with_object({}){|(k,v), hash| hash[k.to_s.downcase] = v }
+
+        if info.has_key?(name)
+          response.reply(info[name])
+        else
+          response.reply("That conference number isn't available: #{name}")
+        end
       end
       Lita.register_handler(self)
     end
