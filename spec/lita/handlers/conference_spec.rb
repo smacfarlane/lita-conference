@@ -25,6 +25,11 @@ describe Lita::Handlers::Conference, lita_handler: true do
       send_command("conference foo")
       expect(replies.last).to eq("That conference number isn't available")
     end
+
+    it 'responds with conference information when requsting a valid conference' do
+      send_command("conference test")
+      expect(replies.last).to eq("test conference")
+    end
   end
   # it "responds with list of conference numbers when there are no parameters" do
   #   send_command("conference")
