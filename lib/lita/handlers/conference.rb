@@ -4,8 +4,8 @@ module Lita
       # insert handler code here
       config :conferences, type: Hash, default: Hash.new
 
-      route /^conferences/, :conferences, command: true, help: { "conferences" => "List available conference numbers" }
-
+      route %r{^conferences}, :conferences, command: true, help: { "conferences": "List available conference numbers" }
+      route %r{^conference\s+(\w+)}, :conference, command: true, help: { "conference CONFERENCE": "Show conference information for CONFERENCE" }
 
       def conferences(response)
         if config.conferences.empty?
@@ -15,6 +15,9 @@ module Lita
         end
       end
 
+      def conference(response)
+        response.reply("That conference number isn't available")
+      end
       Lita.register_handler(self)
     end
   end
