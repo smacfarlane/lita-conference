@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe Lita::Handlers::Conference, lita_handler: true do
   it { is_expected.to route_command("conferences").to(:conferences) }
+  it { is_expected.to route_command("conference foo").to(:conference) }
 
   context "Default configuration" do
     it 'responds with default message' do
@@ -18,6 +19,11 @@ describe Lita::Handlers::Conference, lita_handler: true do
     it 'responds with a list of conferences' do
       send_command("conferences")
       expect(replies.last).to eq("Available Conference Numbers: Test, Other")
+    end
+
+    it 'respond with error when requesting an invalid conference' do
+      send_command("conference foo")
+      expect(replies.last).to eq("That conference number isn't available")
     end
   end
   # it "responds with list of conference numbers when there are no parameters" do
