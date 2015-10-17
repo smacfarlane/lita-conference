@@ -23,7 +23,7 @@ describe Lita::Handlers::Conference, lita_handler: true do
 
     it 'respond with error when requesting an invalid conference' do
       send_command("conference foo")
-      expect(replies.last).to eq("That conference number isn't available")
+      expect(replies.last).to eq("That conference number isn't available: foo")
     end
 
     it 'responds with conference information when requsting a valid conference' do
