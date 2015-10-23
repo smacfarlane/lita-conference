@@ -31,8 +31,4 @@ describe Lita::Handlers::Conference, lita_handler: true do
       expect(replies.last).to eq("test conference")
     end
   end
-  # it "responds with list of conference numbers when there are no parameters" do
-  #   send_command("conference")
-  #   expect(replies.last).to eq("test conference")
-  # end
 end
